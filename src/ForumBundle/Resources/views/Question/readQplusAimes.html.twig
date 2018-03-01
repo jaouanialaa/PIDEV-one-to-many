@@ -1,0 +1,175 @@
+{% extends '::base.html.twig' %}
+{% block contenu %}
+    <div class="our-blog blog-pages ptb-100 fix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="section-title text-center">
+                        <h2>Forum</h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <aside class="widget categories grey-bg mb-30">
+                <div class="widget-title">
+                    <h3>categories</h3>
+                </div>
+                <div class="widget-categories">
+
+
+                    {% for categorie in categories %}
+                        {% if categorie.niveau==1 %}
+                            <h6>{{ categorie.nom }}</h6>
+                            <ul>
+                                {% for sub_categorie in categories %}
+                                    {% if sub_categorie.parent==categorie.id %}
+                                        <li class="mega-sub"><a
+                                                    href="{{ path('readQC',{'id':sub_categorie.id}) }}">{{ sub_categorie.nom }}</a>
+
+
+                                        </li>
+
+
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+
+
+                        {% endif %}
+                    {% endfor %}
+
+
+                    <!--Accordion item 4 end-->
+
+                </div>
+            </aside>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="shop-item-filter">
+                        <div class="col-md-4 col-sm-6  col-xs-12">
+                            <div class="filter-by">
+                                <div class="filter-title">
+                                    <p>Order by: </p>
+                                </div>
+                                <div class="filter-form">
+                                    <form action="">
+                                        <select id="order">
+                                            <option>ORDER BY</option>
+                                            <option value="{{ path('read') }}">All</option>
+                                            <option value="{{ path('readplusaime') }}">Les plus aimées</option>
+                                            <option value="{{ path('readpluscommente') }}">Les plus commentées</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <h5>
+                <aside>
+                    <ul>
+                        <li>
+                            <a href="{{ path('create') }}">+Ajouter une question</a>
+                        </li>
+                    </ul>
+                </aside>
+            </h5>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+
+
+            {# sorting of properties based on query components #}
+
+
+
+                    <div class="row blog-list">
+                        {% for question in Questions %}
+
+                            <div class="col-md-10 col-sm-12 col-xs-12">
+                                <div class="single-blog">
+                                    <div class="single-blog-top fix">
+
+                                        <div class="blog-img">
+                                            <a href="#">
+
+                                                {% if question.img != null %}
+                                                <a href="{{ path('readQ',{'id':question.id }) }}"></a><img
+                                                        src="{{ asset('imagesPidev/' ~ question.img) }}" alt="img"></a>
+
+                                            {% endif %}
+                                            </a>
+                                        </div>
+                                        <div class="blog-desc">
+                                            <h6>
+                                                <a href="{{ path('readQ',{'id':question.id }) }}">{{ question.titre }}</a>
+                                            </h6>
+
+                                            <a class="read-more" href="{{ path('readQ',{'id':question.id }) }}">Read
+                                                more <i class="zmdi zmdi-long-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="blog-bottom-action">
+                                        <div class="blog-publish">
+                                            <p><i class="zmdi zmdi-time"></i>{{ question.dateQ | date }}</p>
+                                        </div>
+                                        <div class="blog-action-box">
+
+                                            <ul>
+
+                                                <li><a href="{{ path('createS',{'id_q':question.id}) }}">signaler</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+        </div>
+    </div>
+
+    </tr>
+    {# display navigation #}
+    <div class="navigation">
+    </div>
+
+
+
+
+
+    {# total items count #}
+
+
+    {# table body #}
+
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#order").change(function(event) {
+                location.href=$(this).val();
+            });
+        });
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+

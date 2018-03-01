@@ -1,0 +1,143 @@
+{% extends '::admin.html.twig' %}
+
+{% block contenu %}
+
+    <div class="right_col" role="main">
+        <div class="">
+
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>
+                        Forum
+                        <small>
+                            Les questions du forum
+                        </small>
+                    </h3>
+                </div>
+
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+
+
+            <div class="x_content">
+
+                <div class="nav_menu">
+
+                <nav class="" role="navigation">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                <li role="presentation" class="dropdown">
+
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green">6</span>
+                    </a>
+                    {% for notif in notifications %}
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
+
+                        <li>
+                            <a>
+
+                                <span class="message">
+                                        <a href="{{ path('readAdminSignale') }}">un utilisateur a signalé la question {{ notif.link }}</a>
+                                    </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    {% endfor %}
+                </li>
+                </ul>
+                </nav>
+                </div>
+
+
+
+
+                <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                    <thead>
+                    <tr class="headings">
+
+                        <th class="column-title">Titre</th>
+                        <th class="column-title">Contenu</th>
+                        <th class="column-title">Date </th>
+                        <th class="column-title">categorie </th>
+                        <th class="column-title">user </th>
+                        <th class="column-title">update </th>
+                        <th class="column-title">delete </th>
+
+                        <th class="column-title no-link last"><span class="nobr">Action</span>
+                        </th>
+                        <th class="bulk-actions" colspan="7">
+                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                        </th>
+                    </tr>
+                    </thead>
+                    {% for question in questions %}
+                    <tbody>
+                    <tr class="even pointer">
+
+                        <td class=" ">{{ question.titre }}</td>
+                        <td class=" ">{{ question.contenu }} </td>
+                        <td class=" ">{{ question.dateQ | date}}</td>
+                        <td class=" ">{{ question.categorie }}</td>
+                        <td class=" ">{{ question.iduser }}</td>
+                        <td class=" last"><a href="{{ path('updateAdmin',{'id':question.id}) }}">update</a>
+                        <td class=" last"><a href="{{ path('deleteAdmin',{'id':question.id}) }}">delete</a>
+                        <td class=" last"><a href="{{ path('readQAdmin',{'id':question.id}) }}">View comments</a>   
+                        </td>
+                    </tr>
+
+                    </tbody>
+                        {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

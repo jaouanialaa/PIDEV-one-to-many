@@ -1,0 +1,67 @@
+forum_homepage:
+    path:     /
+    defaults: { _controller: ForumBundle:Default:index }
+create:
+    path:     /forum/question/create
+    defaults: { _controller: ForumBundle:Question:create }
+mgilet_notifications:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+create_commentaire:
+    path:     /forum/commentaire/create/{id}
+    defaults: { _controller: ForumBundle:Commentaire:createCommentaire }
+read:
+    path:     /forum/question/read
+    defaults: { _controller: ForumBundle:Question:read }
+update:
+    path:     /forum/question/update/{id}
+    defaults: { _controller: ForumBundle:Question:update }
+delete:
+    path:     /forum/question/delete/{id}
+    defaults: { _controller: ForumBundle:Question:delete }
+readQ:
+    path:     /forum/question/readQ/{id}
+    defaults: { _controller: ForumBundle:Question:readQ }
+deleteC:
+    path:     /forum/Commentaire/deleteC/{id_q}/{id_c}
+    defaults: { _controller: ForumBundle:Commentaire:deleteC }
+updateC:
+    path:     /forum/question/updateC/{id_q}/{id_c}
+    defaults: { _controller: ForumBundle:Commentaire:updateC }
+createS:
+    path:     /forum/question/createS/{id_q}
+    defaults: { _controller: ForumBundle:Signale:createS }
+createA:
+    path:     /forum/question/createA/{id_q}
+    defaults: { _controller: ForumBundle:AimeF:createA }
+readQC:
+    path:     /forum/question/readQC/{id}
+    defaults: { _controller: ForumBundle:Question:readQC }
+readAdmin:
+    path:     /Admin/forum/question/readAdmin
+    defaults: { _controller: ForumBundle:Question:readAdmin }
+updateAdmin:
+    path:     /Admin/forum/question/updateAdmin/{id}
+    defaults: { _controller: ForumBundle:Question:updateAdmin }
+deleteAdmin:
+    path:     /Admin/forum/question/deleteAdmin/{id}
+    defaults: { _controller: ForumBundle:Question:deleteAdmin }
+readQAdmin:
+    path:     /Admin/forum/question/readQAdmin/{id}
+    defaults: { _controller: ForumBundle:Question:readQAdmin }
+deleteA:
+    path:     /forum/Commentaire/deleteA/{id_q}/{id_c}
+    defaults: { _controller: ForumBundle:AimeF:deleteA }
+charteLine:
+    path:     /forum/Commentaire/charteline
+    defaults: { _controller: ForumBundle:Question:chartLine }
+readplusaime:
+    path:     /forum/question/readplusaime
+    defaults: { _controller: ForumBundle:Question:readplusaime }
+readAdminSignale:
+    path:     /Admin/forum/question/readAdminSignale
+    defaults: { _controller: ForumBundle:Question:readAdminSignale }
+readpluscommente:
+    path:     /forum/question/readpluscommente
+    defaults: { _controller: ForumBundle:Question:readpluscommente }
+

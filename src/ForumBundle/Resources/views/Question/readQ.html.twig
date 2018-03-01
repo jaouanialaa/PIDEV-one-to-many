@@ -1,0 +1,167 @@
+{% extends '::base.html.twig' %}
+
+{% block contenu %}
+
+    <div class="our-blog-details ptb-100">
+        <div class="container">
+            <div class="article-thumbnail">
+                <img src="{{ asset('imagesPidev/' ~ V.img) }}" alt="">
+                <div class="blog-bottom-action">
+                    <div class="blog-publish">
+                        <p><i class="zmdi zmdi-time"></i>Jun 25, 2017 </p>
+                    </div>
+                    <div class="blog-action-box">
+                        <ul>
+
+                            <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="zmdi zmdi-favorite-outline"></i>{{ aimenombre }}</a></li>
+                            <li><a href="#"><i class="zmdi zmdi-comments"></i>{{ commentaireNombre }}</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div class="comment-title">
+                <h3>({{ commentaireNombre }}) commentaires</h3>
+            </div>
+            <div class="blog-comment-img">
+                <img src="{{ asset('imagesPidev/' ~ V.iduser.img) }}" alt="img" class="img-responsive">
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="blog-left-sidebar">
+
+
+                        <div class="article-desc">
+                            <div class="article-title">
+
+                                <h3>{{ V.titre }}</h3>
+                                <h6>{{ V.iduser.nom }} {{ V.iduser.prenom }} :</h6>
+                            </div>
+                            <div class="article-text">
+                                <p class="text-1">{{ V.contenu }}</p>
+
+                            </div>
+
+                            {% if  jaime != NULL and jaimeq != NULL %}
+
+                                <li><a style="color: red" href="{{ path('deleteA',{'id_q':V.id ,'id_c':jaimeq.id}) }}">Je n'aime plus</a></li>
+
+                            {% else  %}
+
+                                <li><a href="{{ path('createA',{'id_q':V.id}) }}">J'aime</a></li>
+
+
+                            {% endif %}
+
+
+                            {% if user.id == V.iduser.id %}
+                                <div>
+                                    <a href="{{ path('delete',{'id':V.id}) }}">delete</a>
+                                    <a href="{{ path('update',{'id':V.id}) }}">update</a>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="blog-comment-box">
+                            <div class="comment-title">
+                                <h3></h3>
+                            </div>
+
+                            <div class="comment-box-inner fix">
+
+                                {% for com in commentaires %}
+                                    <div class="blog-comment fix">
+                                        <div class="blog-comment-img">
+                                            <img src="{{ asset('imagesPidev/' ~ com.iduser.img) }}" alt="img"
+                                                 class="img-responsive">
+                                        </div>
+                                        <div class="blog-comment-desc">
+                                            <div class="comment-top-box">
+                                                <div class="comment-title-box">
+                                                    <h5>{{ com.iduser }}</h5>
+                                                    <p>{{ com.date | date }}</p>
+                                                </div>
+                                                {% if user.id == com.iduser.id %}
+                                                    <div class="comment-action-box">
+
+                                                        <a href="{{ path('deleteC',{'id_q':V.id ,'id_c':com.id}) }}">delete</a>
+                                                        <a href="{{ path('updateC',{'id_q':V.id ,'id_c':com.id}) }}">update</a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="comment-bottom-box">
+                                                <p>{{ com.contenu }} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!--blog comment form start-->
+                            <div class="blog-comment-form ">
+                                <div class="comment-title">
+                                    <h5>Ajouter un commentaire :</h5>
+                                </div>
+                                {{ form_start(form) }}
+                                <div class="textarea">
+
+                                </div>
+                                {{ form_widget(form) }}
+                                <div class="submit">
+                                    <button type="submit">Ajouter</button>
+
+                                </div>
+
+                                {{ form_end(form) }}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Liste des aimes</h4>
+                </div>
+
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+
+                {% for aimes in aimes %}
+                    <div class="blog-comment fix">
+                        <div class="blog-comment-img">
+                            <img src="{{ asset('imagesPidev/' ~ aimes.iduser.img) }}" alt="img"
+                                 class="img-responsive">
+                        </div>
+                        <div class="blog-comment-desc">
+                            <div class="comment-top-box">
+                                <div class="comment-title-box">
+                                    <h5>{{ aimes.iduser }}</h5>
+                                    <p>{{ aimes.date | date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
